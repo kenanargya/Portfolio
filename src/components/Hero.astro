@@ -1,0 +1,77 @@
+---
+import type { HeroProps } from "src/types";
+
+// Tambahkan properti opsional untuk CTA kedua (LinkedIn)
+type Props = HeroProps & { linkedinUrl?: string };
+
+const { name, specialty, summary, email, linkedinUrl } = Astro.props as Props;
+const to = encodeURIComponent(email);
+const subject = encodeURIComponent("Hello Ken — Portfolio Inquiry");
+const body = encodeURIComponent(
+  "Hi Ken,\n\nI saw your portfolio and would like to discuss...",
+);
+const gmailHref = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${subject}&body=${body}`;
+---
+
+<section class="relative overflow-hidden py-24 md:py-32" id="hero">
+  <!-- radial glow -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute -top-24 left-1/2 -z-10 h-[720px] w-[1000px] -translate-x-1/2 [background:radial-gradient(50%_50%_at_50%_50%,_rgba(59,130,246,0.18)_0%,_rgba(59,130,246,0.10)_35%,_rgba(2,6,23,0)_70%)]"
+  >
+  </div>
+
+  <!-- subtle grid -->
+  <!-- <div aria-hidden="true" class="pointer-events-none absolute inset-0 [background:radial-gradient(circle_at_center,transparent_60%,rgba(255,255,255,.04)_61%),linear-gradient(transparent_23px,rgba(255,255,255,.04)_24px),linear-gradient(90deg,transparent_23px,rgba(255,255,255,.04)_24px)] [background-size:100%_100%,24px_24px,24px_24px]"></div> -->
+
+  <div class="relative">
+    <div class="mb-8 flex items-center gap-4">
+      <img
+        src="/ken.jpg"
+        alt="Ken Anargya Alkausar"
+        class="h-16 w-16 rounded-full object-cover ring-2 ring-white/20"
+      />
+      <h1
+        class="font-serif text-5xl font-bold tracking-tightest text-white sm:text-6xl md:text-7xl"
+      >
+        {name}
+      </h1>
+    </div>
+
+    <p
+      class="mb-6 bg-gradient-to-r from-zinc-100 to-zinc-400 bg-clip-text font-serif text-3xl font-bold tracking-tighter text-transparent sm:text-4xl md:text-5xl"
+    >
+      {specialty}
+    </p>
+
+    <p class="mb-8 max-w-2xl text-base text-neutral md:text-lg">
+      {summary}
+    </p>
+
+    <div class="flex flex-wrap items-center gap-4">
+      <!-- CTA utama: email -->
+      <a
+        class="group inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-medium text-white transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        href={gmailHref}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Get in Touch
+      </a>
+
+      <!-- CTA sekunder: LinkedIn -->
+      {
+        linkedinUrl && (
+          <a
+            class="inline-flex items-center gap-2 rounded-full bg-white/10 px-6 py-4 text-sm font-medium text-white ring-1 ring-white/15 transition hover:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/40"
+            href={linkedinUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View LinkedIn
+          </a>
+        )
+      }
+    </div>
+  </div>
+</section>
