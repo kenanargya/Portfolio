@@ -62,7 +62,7 @@ export const SITE_CONTENT: SiteContent = {
     },
     {
       name: "SkyAfra",
-      summary: "A social network that replicates the features of Instagram",
+      summary: "Bangkit capstone: social app integrating an AI waste-classification system. Deployed APIs & ML model on Google Cloud, achieving 93% classification accuracy.",
       linkPreview: "/",
       linkSource: "https://github.com/kenanargya/SkyAfra",
       image: "/skyafra.png",
